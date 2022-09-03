@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {useParams, Link} from "react-router-dom";
 import Shuffle from "../components/Shuffle";
 import Search from "../components/Search";
@@ -23,7 +23,9 @@ function CategoryFood(){
                 return null
         }
     }
-    
+
+    const foods = ["돌솥비빔밥", "간장계란밥", "곤드레비빔밥", "산채비빔밥", "밥바라비바라", "바라라비리바라", "돌솥비빔밥", "간장계란밥", "곤드레비빔밥", "산채비빔밥", "밥바라비바라", "바라라비리바라"]
+
     return(
         <div className="">
             <div>
@@ -34,15 +36,16 @@ function CategoryFood(){
                 </div>
                 {getTitle(id)}
             </div>
-            <div className="flex justify-center my-10 h-full">
-                <div className="grid place-content-start grid-cols-5 gap-3 w-9/12 h-full bg-rose-300 p-5">
-                    <FoodBtn name="돌솥비빔밥"/>
-                    <FoodBtn name="간장계란밥"/>
-                    <FoodBtn name="돌솥비빔밥"/>
-                    <FoodBtn name="간장계란밥"/>                    <FoodBtn name="돌솥비빔밥"/>
-                    <FoodBtn name="간장계란밥"/>
+            <div className="flex justify-center">
+                <div className="flex flex-wrap justify-center w-5/6 h-full mt-10 bg-red-300">
+                    {
+                        foods.map((food, index) => {
+                            return <FoodBtn key={index} name={food} index={'1'}/>
+                        })
+                    }
                 </div>
             </div>
+            {/*modal===true ? <Modal/> : null*/}
         </div>
     );
 }
