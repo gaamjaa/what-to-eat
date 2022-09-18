@@ -1,5 +1,5 @@
 //import './App.css';
-import {
+/* import {
   BrowserRouter,
   Routes,
   Route,
@@ -19,10 +19,10 @@ function App() {
   );
 }
 
-export default App;
+export default App;*/
 
 
-/*
+
 // api 테스트 코드 (참고용으로 쓰라고 남겨둠)
 import logo from './logo.svg';
 import './App.css';
@@ -61,4 +61,4 @@ function App() {
     );
 }
 
-export default App;*/
+export default App;
