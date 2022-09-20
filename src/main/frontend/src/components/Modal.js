@@ -2,7 +2,7 @@ import React from 'react';
 import '../css/Modal.css';
 import Foods from './Foods';
 
-function Modal({modalClose, isRandom}){
+function Modal({modalClose}){
     const onCloseModal = (e) => {
         console.log('e.target: ', e.target);
         console.log('e.tarcurrentTargetget: ', e.currentTarget)
@@ -18,11 +18,6 @@ function Modal({modalClose, isRandom}){
                     <img src='/img/close.png' className='w-3 h-3 m-1'/>
                 </button>
                 <div className=''>
-                    {
-                        isRandom ? 
-                        <h1 className='text-center font-bold text-4xl mt-10'>오늘의 메뉴는?</h1> :
-                        null
-                    }
                     <Foods 
                         name = "치킨"
                         foodImg= "/img/chicken.png"
