@@ -27,26 +27,32 @@ public class MenuRepositoryTest {
     public void 검색어로_찾기() {
         //given
         String name1 = "치킨";
+        String category1 = "튀김류";
         String keyword1 = "#닭고기 #튀김";
 
         menuRepository.save(Menu.builder()
                 .name(name1)
+                .category(category1)
                 .keyword(keyword1)
                 .build());
 
         String name2 = "탕수육";
+        String category2 = "튀김류";
         String keyword2 = "#돼지고기 #튀김 #중식";
 
         menuRepository.save(Menu.builder()
                 .name(name2)
+                .category(category2)
                 .keyword(keyword2)
                 .build());
 
         String name3 = "삼계탕";
+        String category3 = "국(탕)류";
         String keyword3 = "#닭고기 #탕";
 
         menuRepository.save(Menu.builder()
                 .name(name3)
+                .category(category3)
                 .keyword(keyword3)
                 .build());
 
@@ -65,5 +71,46 @@ public class MenuRepositoryTest {
 
         assertThat(menuList_keyword2.get(0).getName()).isEqualTo(name1);
         assertThat(menuList_keyword2.get(1).getName()).isEqualTo(name2);
+    }
+
+    @Test
+    public void 카테고리로_찾기() {
+        //given
+        String name1 = "치킨";
+        String category1 = "튀김류";
+        String keyword1 = "#닭고기 #튀김";
+
+        menuRepository.save(Menu.builder()
+                .name(name1)
+                .category(category1)
+                .keyword(keyword1)
+                .build());
+
+        String name2 = "탕수육";
+        String category2 = "튀김류";
+        String keyword2 = "#돼지고기 #튀김 #중식";
+
+        menuRepository.save(Menu.builder()
+                .name(name2)
+                .category(category2)
+                .keyword(keyword2)
+                .build());
+
+        String name3 = "삼계탕";
+        String category3 = "국(탕)류";
+        String keyword3 = "#닭고기 #탕";
+
+        menuRepository.save(Menu.builder()
+                .name(name3)
+                .category(category3)
+                .keyword(keyword3)
+                .build());
+
+        //when
+        List<Menu> menuList_name = menuRepository.findByCategoryWord("튀김류");
+
+        //then
+        assertThat(menuList_name.get(0).getName()).isEqualTo(name1);
+        assertThat(menuList_name.get(1).getName()).isEqualTo(name2);
     }
 }

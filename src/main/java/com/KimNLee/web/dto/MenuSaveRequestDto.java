@@ -1,5 +1,5 @@
 package com.KimNLee.web.dto;
-
+//save 필요없으면 삭제해도 ok
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

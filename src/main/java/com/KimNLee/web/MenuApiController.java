@@ -15,8 +15,18 @@ public class MenuApiController {
 
     private final MenuService menuService;
 
-    @GetMapping("/api/v1/menu")
+    @GetMapping("/api/menu/search")
     public List<MenuResponseDto> search(@RequestParam("searchWord") String searchWord) {
         return menuService.search(searchWord);
+    }
+
+    @GetMapping("/api/menu/random")
+    public List<MenuResponseDto> random() {
+        return menuService.random();
+    }
+
+    @GetMapping("/api/menu/category")
+    public List<MenuResponseDto> category(@RequestParam("categoryWord") String categoryWord) {
+        return menuService.category(categoryWord);
     }
 }

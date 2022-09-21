@@ -2,7 +2,6 @@ package com.KimNLee.web;
 
 import com.KimNLee.domain.menu.Menu;
 import com.KimNLee.domain.menu.MenuRepository;
-import com.KimNLee.web.dto.MenuSaveRequestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.After;
 import org.junit.Before;
@@ -56,30 +55,36 @@ public class MenuApiControllerTest {
     public void Menu_검색() throws Exception {
 
         String name1 = "치킨";
+        String category1 = "튀김류";
         String keyword1 = "#닭고기 #튀김";
 
         menuRepository.save(Menu.builder()
                 .name(name1)
+                .category(category1)
                 .keyword(keyword1)
                 .build());
 
         String name2 = "탕수육";
+        String category2 = "튀김류";
         String keyword2 = "#돼지고기 #튀김 #중식";
 
         menuRepository.save(Menu.builder()
                 .name(name2)
+                .category(category2)
                 .keyword(keyword2)
                 .build());
 
         String name3 = "삼계탕";
+        String category3 = "국(탕)류";
         String keyword3 = "#닭고기 #탕";
 
         menuRepository.save(Menu.builder()
                 .name(name3)
+                .category(category3)
                 .keyword(keyword3)
                 .build());
 
-        String url = "http://localhost:" + port + "/api/v1/menu";
+        String url = "http://localhost:" + port + "/api/menu/search";
 
         // 메뉴명으로 검색
         mvc.perform(
@@ -98,5 +103,72 @@ public class MenuApiControllerTest {
                 .andExpect(jsonPath("$[0].keyword", is(keyword1)))
                 .andExpect(jsonPath("$[1].name", is(name3)))
                 .andExpect(jsonPath("$[1].keyword", is(keyword3)));
+    }
+
+    @Test
+    public void Random_검색() throws Exception {
+
+        String name = "치킨";
+        String category = "튀김류";
+        String keyword = "#닭고기 #튀김";
+
+        menuRepository.save(Menu.builder()
+                .name(name)
+                .category(category)
+                .keyword(keyword)
+                .build());
+
+        String url = "http://localhost:" + port + "/api/menu/random";
+
+        // 메뉴명으로 검색
+        mvc.perform(get(url))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].name", is(name)))
+                .andExpect(jsonPath("$[0].keyword", is(keyword)));
+
+    }
+
+    @Test
+    public void Category_검색() throws Exception {
+
+        String name1 = "치킨";
+        String category1 = "튀김류";
+        String keyword1 = "#닭고기 #튀김";
+
+        menuRepository.save(Menu.builder()
+                .name(name1)
+                .category(category1)
+                .keyword(keyword1)
+                .build());
+
+        String name2 = "탕수육";
+        String category2 = "튀김류";
+        String keyword2 = "#돼지고기 #튀김 #중식";
+
+        menuRepository.save(Menu.builder()
+                .name(name2)
+                .category(category2)
+                .keyword(keyword2)
+                .build());
+
+        String name3 = "삼계탕";
+        String category3 = "국(탕)류";
+        String keyword3 = "#닭고기 #탕";
+
+        menuRepository.save(Menu.builder()
+                .name(name3)
+                .category(category3)
+                .keyword(keyword3)
+                .build());
+
+        String url = "http://localhost:" + port + "/api/menu/category";
+
+        // 메뉴명으로 검색
+        mvc.perform(
+                        get(url)
+                                .param("categoryWord", "튀김류"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].name", is(name1)))
+                .andExpect(jsonPath("$[1].name", is(name2)));
     }
 }

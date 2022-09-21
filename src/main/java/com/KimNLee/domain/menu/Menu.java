@@ -23,6 +23,8 @@ public class Menu extends BaseTimeEntity {
     @Column(nullable = false)
     private String name;
 
+    private String category;
+
     private String keyword;
 
     private String image;
@@ -30,8 +32,9 @@ public class Menu extends BaseTimeEntity {
     private String description;
 
     @Builder
-    public Menu(String name, String keyword, String image, String description) {
+    public Menu(String name, String category, String keyword, String image, String description) {
         this.name = name;
+        this.category = category;
         this.keyword = keyword;
         this.image = image;
         this.description = description;

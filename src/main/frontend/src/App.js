@@ -33,7 +33,7 @@ function App() {
     const [hello, setHello] = useState('')
 
     useEffect(() => {
-        axios.get("/api/v1/menu?searchWord=탕수육")
+        axios.get("/api/menu/search?searchWord=치킨")
         .then(response => setHello(JSON.stringify(response.data)))
         .catch(error => console.log(error))
     }, []);

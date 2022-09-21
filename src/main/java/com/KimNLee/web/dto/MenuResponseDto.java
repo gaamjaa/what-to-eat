@@ -10,6 +10,8 @@ public class MenuResponseDto {
 
     private String name;
 
+    private String category;
+
     private String keyword;
 
     private String image;
@@ -19,6 +21,7 @@ public class MenuResponseDto {
     public MenuResponseDto(Menu entity) {
         this.id = entity.getId();
         this.name = entity.getName();
+        this.category = entity.getCategory();
         this.keyword = entity.getKeyword();
         this.image = entity.getImage();
         this.description = entity.getDescription();

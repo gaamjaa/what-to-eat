@@ -22,4 +22,18 @@ public class MenuService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
+    public List<MenuResponseDto> random() {
+        return menuRepository.orderByRandom().stream()
+                .map(MenuResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<MenuResponseDto> category(String categoryWord) {
+        return menuRepository.findByCategoryWord(categoryWord).stream()
+                .map(MenuResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
 }
