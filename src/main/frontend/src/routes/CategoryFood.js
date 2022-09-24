@@ -12,6 +12,17 @@ function CategoryFood(){
     useEffect(()=>{
         getFoods();
     }, []);
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //     setLoading(true);
+    //     const response = await axios.get(
+    //         "https://jsonplaceholder.typicode.com/posts"
+    //     );
+    //     setPosts(response.data);
+    //     setLoading(false);
+    //     };
+    //     fetchData();
+    // }, []);
 
     const getTitle = (num) => {
         switch(Number(num)) {
@@ -24,7 +35,7 @@ function CategoryFood(){
         }
     }
 
-    const foods = ["돌솥비빔밥", "간장계란밥", "곤드레비빔밥", "산채비빔밥", "밥바라비바라", "바라라비리바라", "돌솥비빔밥", "간장계란밥", "곤드레비빔밥", "산채비빔밥", "밥바라비바라", "바라라비리바라"]
+    const foods = ["돌솥비빔밥", "간장계란밥", "곤드레비빔밥", "산채비빔밥", "밥바라비바라", "바라라비리바라", "돌솥비빔밥", "간장계란밥", "곤드레비빔밥", "산채비빔밥", "밥바라비바라", "바라라비리바라","돌솥비빔밥", "간장계란밥", "곤드레비빔밥", "산채비빔밥", "밥바라비바라", "바라라비리바라", "돌솥비빔밥", "간장계란밥", "곤드레비빔밥", "산채비빔밥", "밥바라비바라", "바라라비리바라"]
 
     return(
         <div className="">
