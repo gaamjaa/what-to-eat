@@ -3,6 +3,7 @@ import ModalContainer from '../components/ModalContainer';
 import Search from '../components/Search';
 import Shuffle from "../components/Shuffle";
 import {Link} from "react-router-dom";
+import { useState } from 'react';
 
 function Home(){
     const menuList = [
@@ -50,7 +51,7 @@ function Home(){
                     }
                 </div>
             </div>
-
+            <Link to="/prac"><button>페이지네이션 연습 페이지</button></Link>
         </div>
     );
 }
