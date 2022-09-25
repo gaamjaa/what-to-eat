@@ -56,6 +56,7 @@ function CategoryFood(){
                     <Search />
                     <Shuffle />
                 </div>
+                {getTitle(id)}
             </div>
             <div className="flex flex-col">
                 <div className="h-full mx-10 mt-10 bg-red-300 mb-10">
