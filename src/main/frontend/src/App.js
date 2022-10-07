@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import CategoryFood from "./routes/CategoryFood";
 import Home from "./routes/Home";
-
+import Prac from "./routes/Prac";
 
 function App() {
   return (
@@ -14,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/menu/:id" element={<CategoryFood/>}/>
+        <Route path="/prac" element={<Prac/>}/>
       </Routes>
     </BrowserRouter>
   );

@@ -41,12 +41,12 @@ function FoodBtn ({name, index}) {
     }
 
     return(
-        <div>
+        <span>
         <button className="w-28 h-28 rounded-full bg-white m-3" onClick={onClick}>
             {name}
         </button>
         {modal===true ? <Modal modalClose={setModal}/> : null}
-        </div>
+        </span>
     );
 }
 

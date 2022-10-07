@@ -1,16 +1,18 @@
 import {useNavigate} from 'react-router-dom';
 
-function Category({name, index}) {
+function Category({name, id, img}) {
     const navigate = useNavigate();
 
     const onClick = () => {
-        navigate(`/menu/${index}`);
+        navigate(`/menu/${id}`);
     }
     return(
-        <button className="w-28 h-24 bg-rose-200 rounded-md m-1" onClick={onClick}>
-            <img src=""/>
-            {name}
-        </button>
+        <div className='flex flex-col mb-4'>
+            <button className="w-28 h-24 bg-rose-200 rounded-md m-1" onClick={onClick}>
+                <img src={img}/>
+            </button>
+            <p className='text-center'>{name}</p>
+        </div>
     );
 }
 
