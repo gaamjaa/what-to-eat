@@ -106,6 +106,50 @@ public class MenuApiControllerTest {
     }
 
     @Test
+    public void Menu_이름_검색() throws Exception {
+
+        String name1 = "치킨";
+        String category1 = "튀김류";
+        String keyword1 = "#닭고기 #튀김";
+
+        menuRepository.save(Menu.builder()
+                .name(name1)
+                .category(category1)
+                .keyword(keyword1)
+                .build());
+
+        String name2 = "탕수육";
+        String category2 = "튀김류";
+        String keyword2 = "#돼지고기 #튀김 #중식";
+
+        menuRepository.save(Menu.builder()
+                .name(name2)
+                .category(category2)
+                .keyword(keyword2)
+                .build());
+
+        String name3 = "삼계탕";
+        String category3 = "국(탕)류";
+        String keyword3 = "#닭고기 #탕";
+
+        menuRepository.save(Menu.builder()
+                .name(name3)
+                .category(category3)
+                .keyword(keyword3)
+                .build());
+
+        String url = "http://localhost:" + port + "/api/menu/searchName";
+
+        // 메뉴명으로 검색
+        mvc.perform(
+                        get(url)
+                                .param("searchName", "탕수육"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].name", is(name2)))
+                .andExpect(jsonPath("$[0].keyword", is(keyword2)));
+    }
+
+    @Test
     public void Random_검색() throws Exception {
 
         String name = "치킨";

@@ -20,6 +20,11 @@ public class MenuApiController {
         return menuService.search(searchWord);
     }
 
+    @GetMapping("/api/menu/searchName")
+    public List<MenuResponseDto> searchName(@RequestParam("searchName") String searchName) {
+        return menuService.search(searchName);
+    }
+
     @GetMapping("/api/menu/random")
     public List<MenuResponseDto> random() {
         return menuService.random();

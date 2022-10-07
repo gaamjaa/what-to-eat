@@ -23,6 +23,13 @@ public class MenuService {
     }
 
     @Transactional(readOnly = true)
+    public List<MenuResponseDto> searchName(String searchName) {
+        return menuRepository.findBySearchName(searchName).stream()
+                .map(MenuResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
     public List<MenuResponseDto> random() {
         return menuRepository.orderByRandom().stream()
                 .map(MenuResponseDto::new)
