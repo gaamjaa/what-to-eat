@@ -22,7 +22,7 @@ public class MenuApiController {
 
     @GetMapping("/api/menu/searchName")
     public List<MenuResponseDto> searchName(@RequestParam("searchName") String searchName) {
-        return menuService.search(searchName);
+        return menuService.searchName(searchName);
     }
 
     @GetMapping("/api/menu/random")
