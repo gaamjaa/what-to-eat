@@ -3,9 +3,8 @@ import ModalContainer from '../components/ModalContainer';
 import Search from '../components/Search';
 import Shuffle from "../components/Shuffle";
 import {Link} from "react-router-dom";
-import { useState } from 'react';
 
-function Home(){
+function Home(){    
     const menuList = [
         {id: 1, name: '밥류', img: ''},
         {id: 2, name: '면 및 만두류', img: '/img/noodle.png'},
@@ -16,7 +15,7 @@ function Home(){
         {id: 7, name: '구이류', img: ''},
         {id: 8, name: '전류', img: '/img/jeon.png'},
         {id: 9, name: '튀김류', img: ''},
-        {id: 10, name: '볶음류', img: ''},
+        {id: 10, name: '볶음류', img: '/img/bokum.png'},
         {id: 11, name: '무침류', img: ''},
         {id: 12, name: '김치류', img: ''},
         {id: 13, name: '떡류', img: ''},
