@@ -4,7 +4,7 @@ function Category({name, id, img}) {
     const navigate = useNavigate();
 
     const onClick = () => {
-        navigate(`/menu/${id}`);
+        navigate(`/menu/${name}`);
     }
     return(
         <div className='flex flex-col mb-4'>

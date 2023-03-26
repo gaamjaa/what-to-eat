@@ -99,8 +99,10 @@ function Foods({name, category, keyword, foodImg, description}){
                     openGraph.ogImage == null ?
                     null
                     :
-                    <Preview name={name} ogTitle={openGraph.ogTitle} ogUrl={openGraph.ogUrl} ogImage={openGraph.ogImage}/>
+                    <Preview name={name} ogTitle={openGraph.ogTitle} ogUrl={openGraph.ogUrl} ogImage={openGraph.ogImage.url}/>
                 }
+                    {/*간단버전 */}
+                    <Preview name={name} ogTitle={`${name} 검색결과`} ogUrl={description} ogImage={foodImg}/>
                 </div>  
             </div>
         </div>

@@ -6,7 +6,7 @@ function Preview({name, ogTitle, ogUrl, ogImage}) {
                 <p><span className="font-bold">{name}</span> 더 알아보기</p>
                 <div className="flex justify-around items-center w-2/3 shadow-lg">
                     {ogTitle}
-                    <img src={ogImage.url} className="w-20"/>
+                    <img src={ogImage} className="w-20"/>
                 </div>
             </button>
         </a>
