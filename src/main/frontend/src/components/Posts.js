@@ -8,7 +8,7 @@ const Posts = ({ posts, loading }) => {
       {/* <ul> */}
         {posts.map((post, index) => (
         //   <li key={index/*post.id*/}>{post/*.title*/}</li>
-            <FoodBtn key={index} name={post}/>
+            <FoodBtn key={post.id} name={post.name} foodInfo={post}/>
         ))}
       {/* </ul> */}
     </div>

@@ -8,7 +8,7 @@ function Category({name, id, img}) {
     }
     return(
         <div className='flex flex-col mb-4'>
-            <button className="w-28 h-24 bg-rose-200 rounded-md m-1 shadow-md" onClick={onClick}>
+            <button className="w-28 h-24 bg-white rounded-md m-1 shadow-md hover:shadow-rose-200" onClick={onClick}>
                 {
                     img=='' ?
                     null:

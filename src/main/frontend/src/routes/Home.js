@@ -6,29 +6,29 @@ import {Link} from "react-router-dom";
 
 function Home(){    
     const menuList = [
-        {id: 1, name: '밥류', img: ''},
+        {id: 1, name: '밥류', img: '/img/rice.jpg'},
         {id: 2, name: '면 및 만두류', img: '/img/noodle.png'},
         {id: 3, name: '국(탕)류', img: '/img/soup.png'},
         {id: 4, name: '찌개류', img: '/img/jjigae.png'},
-        {id: 5, name: '찜류', img: ''},
-        {id: 6, name: '조림류', img: ''},
-        {id: 7, name: '구이류', img: ''},
+        {id: 5, name: '찜류', img: '/img/jjim.jpg'},
+        {id: 6, name: '조림류', img: '/img/jorim.png'},
+        {id: 7, name: '구이류', img: '/img/roast.jpg'},
         {id: 8, name: '전류', img: '/img/jeon.png'},
-        {id: 9, name: '튀김류', img: ''},
+        {id: 9, name: '튀김류', img: '/img/fried.png'},
         {id: 10, name: '볶음류', img: '/img/bokum.png'},
-        {id: 11, name: '무침류', img: ''},
-        {id: 12, name: '김치류', img: ''},
-        {id: 13, name: '떡류', img: ''},
-        {id: 14, name: '우유 및 유제품류', img: ''},
-        {id: 15, name: '음료류', img: ''},
-        {id: 16, name: '젓갈류', img: ''},
-        {id: 17, name: '죽류', img: ''},
-        {id: 18, name: '회류', img: ''},
-        {id: 19, name: '과자 및 빵류', img: ''},
-        {id: 20, name: '주류', img: ''},
-        {id: 21, name: '원재료', img: ''},
-        {id: 22, name: '장류', img: ''},
-        {id: 23, name: '절임류', img: ''}
+        {id: 11, name: '무침류', img: '/img/muchim.jpg'},
+        {id: 12, name: '김치류', img: '/img/kimchi.jpg'},
+        {id: 13, name: '떡류', img: '/img/ricecake.png'},
+        {id: 14, name: '우유 및 유제품류', img: '/img/milk.jpg'},
+        {id: 15, name: '음료류', img: '/img/juice.jpg'},
+        {id: 16, name: '젓갈류', img: '/img/jutgal.jpg'},
+        {id: 17, name: '죽류', img: '/img/juk.jpg'},
+        {id: 18, name: '회류', img: '/img/sushi.jpg'},
+        {id: 19, name: '과자 및 빵류', img: '/img/bread.jpg'},
+        {id: 20, name: '주류', img: '/img/alcohol.jpg'},
+        {id: 21, name: '원재료', img: '/img/carrot.jpg'},
+        {id: 22, name: '장류', img: '/img/jang.png'},
+        {id: 23, name: '절임류', img: '/img/jeolim.jpg'}
     ]
 
     return (
@@ -50,7 +50,7 @@ function Home(){
                     }
                 </div>
             </div>
-            <Link to="/prac"><button>페이지네이션 연습 페이지</button></Link>
+            {/* <Link to="/prac"><button>페이지네이션 연습 페이지</button></Link> */}
         </div>
     );
 }
