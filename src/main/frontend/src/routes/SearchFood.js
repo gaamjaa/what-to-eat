@@ -1,22 +1,17 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
-import {useParams, Link} from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Shuffle from "../components/Shuffle";
 import Search from "../components/Search";
-import FoodBtn from "../components/FoodBtn";
 import Posts from "../components/Posts";
 import Pagination from "../components/Pagination";
-import axios from "axios";
 
-function CategoryFood(){
+function SearchFood() {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage, setPostsPerPage] = useState(15);
-
-    const {id} = useParams();
-    // console.log(id)
-
-
+    const { query } = useParams();
 
 
     const foods = [
@@ -35,18 +30,17 @@ function CategoryFood(){
         {id:34,name:"보리밥(팥)",category:"밥류",keyword:"#잡곡밥 #보리 #멥쌀",image:"https://t1.daumcdn.net/cfile/tistory/2525833758076CDA3C",description:"https://terms.naver.com/search.naver?query=보리밥(팥)"},
         {id:35,name:"수수밥",category:"밥류",keyword:"#잡곡밥 #수수 #멥쌀",image:"https://mblogthumb-phinf.pstatic.net/20141225_71/jjaehhun_1419465591122bJS3O_JPEG/IMG_8537.JPG?type=w2",description:"https://terms.naver.com/search.naver?query=수수밥"},
     ]
+
     useEffect(() => {
-        axios.get(`/api/menu/category?categoryWord=${id}`)
+        axios.get(`/api/menu/serach?searchWord=${query}`)
         .then(response => {
             console.log(JSON.stringify(response.data))
-            setPosts(JSON.stringify(response.data));
-        }).catch(error => console.log(error))
-
-        //dummy
-        setPosts(foods) //api 연결하면 지우기!!! ==> 이게 카테고리별 음식 버튼 만들어주는 데이터
-
-    }, []);
-    // console.log(posts)
+            setPosts(JSON.stringify(response.data)) //api 연결 후 여는거!!! ==> 검색 결과 데이터
+            }
+        )
+        .catch(error => console.log(error));    
+        setPosts(foods) //api 연결할 때 주석처리
+    }, [query])
 
     const indexOfLast = currentPage * postsPerPage;
     const indexOfFirst = indexOfLast - postsPerPage;
@@ -56,7 +50,7 @@ function CategoryFood(){
     //   console.log(currentPosts)
       return currentPosts;
     };
-    
+
     return(
         <div className="">
             <div>
@@ -65,8 +59,8 @@ function CategoryFood(){
                     <Search />
                     <Shuffle />
                 </div>
-                <h1 className="text-2xl font-bold text-center">{id}</h1>
             </div>
+            <p className="text-center"><span className="font-bold text-xl">{query}</span><span> 검색결과</span></p>
             <div className="flex flex-col">
                 <div className="h-full mx-10 mt-10 mb-10">
                     <Posts posts={currentPosts(posts)} loading={loading}></Posts>
@@ -83,4 +77,4 @@ function CategoryFood(){
     );
 }
 
-export default CategoryFood;
+export default SearchFood;

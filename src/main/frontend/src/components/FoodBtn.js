@@ -1,15 +1,21 @@
 import {useNavigate} from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Foods from "../components/Foods";
 
 //여기서 리덕스를 써볼까? 지금이 딱 
 const Modal = ({modalClose, foodInfo}) => {
+    const [ClickedKw, setClickedKw] = useState(false)
     const onCloseModal = (e) => {
         if(e.target === e.currentTarget){
             modalClose();
         }
     }
     // console.log(foodInfo)
+    useEffect(()=>{
+        if(ClickedKw){
+            modalClose()
+        }
+    }, [ClickedKw])
 
     return(
         <div className='modal_container' onClick={onCloseModal}>
@@ -22,8 +28,9 @@ const Modal = ({modalClose, foodInfo}) => {
                         name = {foodInfo.name}
                         category = {foodInfo.category}
                         keyword = {foodInfo.keyword}
-                        foodImg= {foodInfo.image}
+                        foodImg = {foodInfo.image}
                         description = {foodInfo.description}
+                        modalClose = {setClickedKw}
                     />
                 </div>
             </div>
@@ -40,12 +47,12 @@ function FoodBtn ({name, index, foodInfo}) {
         //현재 누른 메뉴 내용 얻는 api 사용 => 이 함수 안에 state에 오브젝트로 넣던가? 아니면 리덕스 써보기
     }
     return(
-        <span>
-        <button className="relative w-28 h-28 rounded-full bg-white m-3 border-4 border-slate-300 shadow-lg hover:shadow-rose-200" onClick={onClick}>
-            <img src={foodInfo.image} className="absolute blur-sm w-28 h-28 rounded-full left-1/2 top-1/2 translate-x-[-50%] translate-y-[-50%]"></img>
-            <p className='absolute text-center w-28 font-bold'>{name}</p>
-        </button>
-        {modal===true ? <Modal modalClose={setModal} foodInfo={foodInfo}/> : null}
+        <span className='flex flex-col items-center'>
+            <button className="relative w-28 h-28 rounded-full bg-white m-3 shadow-lg hover:shadow-rose-200" onClick={onClick}>
+                <img src={foodInfo.image} className="absolute w-28 h-28 rounded-full left-1/2 top-1/2 translate-x-[-50%] translate-y-[-50%]"></img>
+            </button>
+            <p className='text-center w-28 font-bold'>{name}</p>
+            {modal===true ? <Modal modalClose={setModal} foodInfo={foodInfo}/> : null}
         </span>
     );
 }

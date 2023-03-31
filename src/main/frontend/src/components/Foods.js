@@ -2,14 +2,21 @@ import '../css/Food.css'
 import Preview from './Preview'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-function Foods({name, category, keyword, foodImg, description}){
+function Foods({name, category, keyword, foodImg, description, modalClose}){
     const keywords = keyword.split('#')
     // console.log(keyword, keywords)
     let categoryImg = getCategoryImg(category)
+    const navigate = useNavigate()
 
     const onClickMap = () => {
         window.open(`https://map.naver.com/v5/search/${name}`)
+    }
+    const onClickKeyword = (e) => {
+        const keyword = e.target.name
+        modalClose((current) => !current)
+        navigate(`/search/${keyword}`)
     }
     return(
         <div >
@@ -35,7 +42,7 @@ function Foods({name, category, keyword, foodImg, description}){
                         kw=="" ?
                         null
                         :
-                        <span key={index} className='p-1 mx-1 bg-rose-200 rounded-xl'>#{kw}</span>
+                        <button key={index} onClick={onClickKeyword} className='p-1 mx-1 bg-rose-200 rounded-xl hover:bg-slate-300' name={kw}>#{kw}</button>
                     ))
                 }
                 </div>

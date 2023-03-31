@@ -3,6 +3,13 @@ import Foods from './Foods';
 import axios from 'axios';
 
 const Modal = ({modalClose, foodInfo}) => {
+    const [ClickedKw, setClickedKw] = useState(false)
+    useEffect(()=>{
+        if(ClickedKw){
+            modalClose()
+        }
+    }, [ClickedKw])
+
     const onCloseModal = (e) => {
         //console.log('e.target: ', e.target);
         //console.log('e.tarcurrentTargetget: ', e.currentTarget)
@@ -24,6 +31,7 @@ const Modal = ({modalClose, foodInfo}) => {
                         keyword = {foodInfo.keyword}
                         foodImg= {foodInfo.image}
                         description = {foodInfo.description}
+                        modalClose={setClickedKw}
                     />
                 </div>
             </div>
@@ -55,7 +63,7 @@ function Shuffle() {
     const onClickRandom = () => {
         axios.get("/api/menu/random")
         .then(response => {
-//            setContents(JSON.stringify(response.data)) //api 연결 후 주석 풀기!! ==> 랜덤 음식 받아오는 부분!!!
+            setFoodData(JSON.stringify(response.data))
             console.log(JSON.stringify(response.data))
             }
         )

@@ -2,7 +2,6 @@ import Category from '../components/Category';
 import ModalContainer from '../components/ModalContainer';
 import Search from '../components/Search';
 import Shuffle from "../components/Shuffle";
-import {Link} from "react-router-dom";
 
 function Home(){    
     const menuList = [
@@ -39,7 +38,7 @@ function Home(){
             <div className='flex justify-center'>
                 <Search />
                 <Shuffle/>
-                {/*<ModalContainer/>*/}
+                {/* <ModalContainer/> */}
             </div>
             <div className='flex justify-center'>
                 <div className='flex flex-wrap justify-center w-4/6 h-full mt-10'>

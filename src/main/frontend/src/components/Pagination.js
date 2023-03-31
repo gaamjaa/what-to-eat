@@ -6,11 +6,11 @@ const PageUl = styled.ul`
   list-style: none;
   text-align: center;
   border-radius: 3px;
-  color: white;
+  color: black;
   padding: 1px;
-  border-top: 3px solid #186ead;
-  border-bottom: 3px solid #186ead;
-  background-color: rgba(0, 0, 0, 0.4);
+  border-top: 3px solid #fecdd3;
+  border-bottom: 3px solid #fecdd3;
+  background-color: #f4f4f5;
 `;
 
 const PageLi = styled.li`
@@ -23,11 +23,11 @@ const PageLi = styled.li`
   &:hover {
     cursor: pointer;
     color: white;
-    background-color: #263a6c;
+    background-color: #fecdd3;
   }
   &:focus::after {
     color: white;
-    background-color: #263a6c;
+    background-color: #fecdd3;
   }
 `;
 
