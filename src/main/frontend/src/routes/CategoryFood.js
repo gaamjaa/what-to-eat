@@ -43,7 +43,7 @@ function CategoryFood(){
         }).catch(error => console.log(error))
 
         //dummy
-        setPosts(foods) //api 연결하면 지우기!!! ==> 이게 카테고리별 음식 버튼 만들어주는 데이터
+        //setPosts(foods) //api 연결하면 지우기!!! ==> 이게 카테고리별 음식 버튼 만들어주는 데이터
 
     }, []);
     // console.log(posts)

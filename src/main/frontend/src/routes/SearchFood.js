@@ -39,7 +39,7 @@ function SearchFood() {
             }
         )
         .catch(error => console.log(error));    
-        setPosts(foods) //api 연결할 때 주석처리
+        //setPosts(foods) //api 연결할 때 주석처리
     }, [query])
 
     const indexOfLast = currentPage * postsPerPage;

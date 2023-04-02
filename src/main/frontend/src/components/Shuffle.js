@@ -68,7 +68,7 @@ function Shuffle() {
             }
         )
         .catch(error => console.log(error))
-        setFoodData(randomMenu2) //api 연결 후 삭제!!!!
+        //setFoodData(randomMenu2) //api 연결 후 삭제!!!!
         modalClose()
     }
 
