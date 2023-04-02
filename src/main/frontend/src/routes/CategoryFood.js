@@ -5,6 +5,7 @@ import Search from "../components/Search";
 import FoodBtn from "../components/FoodBtn";
 import Posts from "../components/Posts";
 import Pagination from "../components/Pagination";
+import axios from "axios";
 
 function CategoryFood(){
     const [posts, setPosts] = useState([]);
@@ -13,38 +14,46 @@ function CategoryFood(){
     const [postsPerPage, setPostsPerPage] = useState(15);
 
     const {id} = useParams();
-    // 이 부분이 아래 fetchData 부분에 들어가면 될 거 같음
-    // const getFoods = async() => {
-
-    // }
-    // useEffect(()=>{
-    //     getFoods();
-    // }, []);
+    // console.log(id)
 
 
 
-    const foods = ["돌솥비빔밥", "간장계란밥", "곤드레비빔밥", "산채비빔밥", "밥바라비바라", "바라라비리바라", "돌솥비빔밥", "간장계란밥", "곤드레비빔밥", "산채비빔밥", "밥바라비바라", "바라라비리바라","돌솥비빔밥", "간장계란밥", "곤드레비빔밥", "산채비빔밥", "밥바라비바라", "바라라비리바라", "돌솥비빔밥", "간장계란밥", "곤드레비빔밥", "산채비빔밥", "밥바라비바라", "바라라비리바라"]
 
+    const foods = [
+        {id:22,name:"눌은밥",category:"밥류",keyword:"#쌀밥 #멥쌀 #물",image:"https://t1.daumcdn.net/thumb/R720x0.fjpg/?fname=http://t1.daumcdn.net/brunch/service/user/4hvY/image/dr-7w7Dw9PRNPoUayZUxdpC66AY.jpg",description:"https://terms.naver.com/search.naver?query=눌은밥"},
+        {id:23,name:"쌀밥",category:"밥류",keyword:"#쌀밥 #멥쌀 #물",image:"https://w.namu.la/s/7aeac70c734963139f7e86569f324e2e4e687fca3767dc6e415d6a0a20e032dc932c245ace59036f9a114a609da373b571c8a3c6d003c65712b153abaefcaafa1a890f150eb111394c4dc248b01a04a0bba97472c4e018918e950e70b3c7a140b4925d75c7c6c2ec6bdc614655884a35",description:"https://terms.naver.com/search.naver?query=쌀밥"},
+        {id:24,name:"찰밥",category:"밥류",keyword:"#쌀밥 #찹쌀 #물",image:"https://recipe1.ezmember.co.kr/cache/recipe/2022/02/14/065773b64b503ab14f5bbbd248fdc7651.jpg",description:"https://terms.naver.com/search.naver?query=찰밥"},
+        {id:25,name:"현미밥",category:"밥류",keyword:"#쌀밥 #멥쌀 #물",image:"http://res.heraldm.com/phpwas/restmb_idxmake.php?idx=507&simg=/content/image/2019/10/14/20191014000235_0.jpg",description:"https://terms.naver.com/search.naver?query=현미밥"},
+        {id:26,name:"검정콩밥",category:"밥류",keyword:"#잡곡밥 #대두 #멥쌀",image:"https://mblogthumb-phinf.pstatic.net/20160817_231/kkm7749_1471434721564ORT89_JPEG/20160816_192105.jpg?type=w2",description:"https://terms.naver.com/search.naver?query=검정콩밥"},
+        {id:27,name:"기장밥",category:"밥류",keyword:"#잡곡밥 #기장 #멥쌀",image:"https://www.sk5.co.kr/neo/ns600/100/10016922.jpg",description:"https://terms.naver.com/search.naver?query=기장밥"},
+        {id:28,name:"녹두밥",category:"밥류",keyword:"#잡곡밥 #녹두 #멥쌀",image:"https://mblogthumb-phinf.pstatic.net/MjAxODAxMTZfMjky/MDAxNTE2MDY5Nzc3NDQy.cyN85Y5NzBdP2z6m0pHGw6qZdqm3FHaY459tne_jYRkg.axR2oEeE1U2Md6_lvd5r6o6R9TLng4n5AFtAUgrbnqwg.JPEG.chamcarekr/11.jpg?type=w800",description:"https://terms.naver.com/search.naver?query=녹두밥"},
+        {id:29,name:"땅콩밥",category:"밥류",keyword:"#잡곡밥 #땅콩 #멥쌀",image:"https://mblogthumb-phinf.pstatic.net/20141010_143/bongs1021_1412921253552rXRxh_JPEG/s_G109023.JPG?type=w2",description:"https://terms.naver.com/search.naver?query=땅콩밥"},
+        {id:30,name:"밤밥",category:"밥류",keyword:"#잡곡밥 #밤 #멥쌀",image:"https://recipe1.ezmember.co.kr/cache/recipe/2015/07/31/c1ba341fe38662568faffc031657aa891.jpg",description:"https://terms.naver.com/search.naver?query=밤밥"},
+        {id:31,name:"보리밥",category:"밥류",keyword:"#잡곡밥 #보리 #멥쌀",image:"https://folkency.nfm.go.kr/upload/img/20190304/20190304123303_t_.jpg",description:"https://terms.naver.com/search.naver?query=보리밥"},
+        {id:32,name:"보리밥(강낭콩)",category:"밥류",keyword:"#잡곡밥 #보리 #멥쌀",image:"https://t1.daumcdn.net/cfile/blog/140D6F124A50399610",description:"https://terms.naver.com/search.naver?query=보리밥(강낭콩)"},
+        {id:33,name:"보리밥(조)",category:"밥류",keyword:"#잡곡밥 #보리 #멥쌀",image:"https://dimg.donga.com/wps/NEWS/IMAGE/2019/06/03/95815548.1.jpg",description:"https://terms.naver.com/search.naver?query=보리밥(조)"},
+        {id:34,name:"보리밥(팥)",category:"밥류",keyword:"#잡곡밥 #보리 #멥쌀",image:"https://t1.daumcdn.net/cfile/tistory/2525833758076CDA3C",description:"https://terms.naver.com/search.naver?query=보리밥(팥)"},
+        {id:35,name:"수수밥",category:"밥류",keyword:"#잡곡밥 #수수 #멥쌀",image:"https://mblogthumb-phinf.pstatic.net/20141225_71/jjaehhun_1419465591122bJS3O_JPEG/IMG_8537.JPG?type=w2",description:"https://terms.naver.com/search.naver?query=수수밥"},
+    ]
     useEffect(() => {
-        //   const fetchData = async () => {
-        //     setLoading(true);
-        //     const response = await axios.get(
-        //       "https://jsonplaceholder.typicode.com/posts"
-        //     );
-        //     setPosts(response.data);
-        //     setLoading(false);
-        //   };
-        //   fetchData();
-            setPosts(foods);
+        axios.get(`/api/menu/category?categoryWord=${id}`)
+        .then(response => {
+            console.log(JSON.stringify(response.data))
+            setPosts(JSON.stringify(response.data));
+        }).catch(error => console.log(error))
+
+        //dummy
+        //setPosts(foods) //api 연결하면 지우기!!! ==> 이게 카테고리별 음식 버튼 만들어주는 데이터
+
     }, []);
-    console.log(posts)
+    // console.log(posts)
 
     const indexOfLast = currentPage * postsPerPage;
     const indexOfFirst = indexOfLast - postsPerPage;
     const currentPosts = (posts) => {
       let currentPosts = 0;
       currentPosts = posts.slice(indexOfFirst, indexOfLast);
-      console.log(currentPosts)
+    //   console.log(currentPosts)
       return currentPosts;
     };
     
@@ -56,17 +65,11 @@ function CategoryFood(){
                     <Search />
                     <Shuffle />
                 </div>
-                {getTitle(id)}
+                <h1 className="text-2xl font-bold text-center">{id}</h1>
             </div>
             <div className="flex flex-col">
-                <div className="h-full mx-10 mt-10 bg-red-300 mb-10">
-                    {/* {
-                        foods.map((food, index) => {
-                            return <FoodBtn key={index} name={food} index={'1'}/>
-                        })
-                    } */}
+                <div className="h-full mx-10 mt-10 mb-10">
                     <Posts posts={currentPosts(posts)} loading={loading}></Posts>
-
                 </div>
                 <div className="flex justify-center">
                 <Pagination
@@ -76,88 +79,8 @@ function CategoryFood(){
                 ></Pagination>
                 </div>
             </div>
-            {/*modal===true ? <Modal/> : null*/}
         </div>
     );
 }
-
-const getTitle = (num) => {
-    let title = "";
-    switch(Number(num)) {
-        case 1:
-            title = "밥류"
-            break
-        case 2:
-            title = "면 및 만두류"
-            break
-        case 3:
-            title = "국(탕)류"
-            break
-        case 4:
-            title = "찌개류"
-            break
-        case 5:
-            title = "찜류"
-            break
-        case 6:
-            title = "조림류"
-            break
-        case 7:
-            title = "구이류"
-            break
-        case 8:
-            title = "전류"
-            break
-        case 9:
-            title = "튀김류"
-            break
-        case 10:
-            title = "볶음류"
-            break
-        case 11:
-            title = "무침류"
-            break
-        case 12:
-            title = "김치류"
-            break
-        case 13:
-            title = "떡류"
-            break
-        case 14:
-            title = "우유 및 유제품류"
-            break
-        case 15:
-            title = "음료류"
-            break
-        case 16:
-            title = "젓갈류"
-            break
-        case 17:
-            title = "죽류"
-            break
-        case 18:
-            title = "회류"
-            break
-        case 19:
-            title = "과자 및 빵류"
-            break
-        case 20:
-            title = "주류"
-            break
-        case 21:
-            title = "원재료"
-            break
-        case 22:
-            title = "장류"
-            break
-        case 23:
-            title = "절임류"
-            break
-        default:
-            break
-    }
-    return(<h1 className="text-2xl font-bold text-center">{title}</h1>);
-}
-
 
 export default CategoryFood;

@@ -1,7 +1,15 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import Foods from './Foods';
+import axios from 'axios';
 
-const Modal = ({modalClose}) => {
+const Modal = ({modalClose, foodInfo}) => {
+    const [ClickedKw, setClickedKw] = useState(false)
+    useEffect(()=>{
+        if(ClickedKw){
+            modalClose()
+        }
+    }, [ClickedKw])
+
     const onCloseModal = (e) => {
         //console.log('e.target: ', e.target);
         //console.log('e.tarcurrentTargetget: ', e.currentTarget)
@@ -9,14 +17,6 @@ const Modal = ({modalClose}) => {
             modalClose()
         }
     }
-
-    const randomMenu = {
-        name: '치킨',
-        Img: '/img/chicken.png',
-        contents: '"치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다.치킨은 너무 맛있습니다. 진짜로요. 저는 개인적으로 굽네 치킨이 좋아요. 볼케이노랑 고추바사삭이 그렇게나 맛있더라구요. 이유는 없어요. 맛있어요. 아마 매운걸 좋아하는 걸지도요. 아 그리고 최근에 훌랄라도 먹어봤는데요. 그것도 엄청 맛있더군요. 집 앞에 있어서 한번 포장해본건데 이제 그냥 가서 쓱 가져와도 될거같기도 하고요. 정말 좋습니다. 그때 머리가 아팠는데도 치킨은 그냥 술술 넘어가더라구요. 역시 치느님이십니다. 그래서 그런데 여러분도 갓치킨 치느님으로 오늘 저녁 어떠신지요.치킨은 너무 맛있습니다. 진짜로요. 저는 개인적으로 굽네 치킨이 좋아요. 볼케이노랑 고추바사삭이 그렇게나 맛있더라구요. 이유는 없어요. 맛있어요. 아마 매운걸 좋아하는 걸지도요. 아 그리고 최근에 훌랄라도 먹어봤는데요. 그것도 엄청 맛있더군요. 집 앞에 있어서 한번 포장해본건데 이제 그냥 가서 쓱 가져와도 될거같기도 하고요. 정말 좋습니다. 그때 머리가 아팠는데도 치킨은 그냥 술술 넘어가더라구요. 역시 치느님이십니다. 그래서 그런데 여러분도 갓치킨 치느님으로 오늘 저녁 어떠신지요.치킨은 너무 맛있습니다. 진짜로요. 저는 개인적으로 굽네 치킨이 좋아요. 볼케이노랑 고추바사삭이 그렇게나 맛있더라구요. 이유는 없어요. 맛있어요. 아마 매운걸 좋아하는 걸지도요. 아 그리고 최근에 훌랄라도 먹어봤는데요. 그것도 엄청 맛있더군요. 집 앞에 있어서 한번 포장해본건데 이제 그냥 가서 쓱 가져와도 될거같기도 하고요. 정말 좋습니다. 그때 머리가 아팠는데도 치킨은 그냥 술술 넘어가더라구요. 역시 치느님이십니다. 그래서 그런데 여러분도 갓치킨 치느님으로 오늘 저녁 어떠신지요.치킨은 너무 맛있습니다. 진짜로요. 저는 개인적으로 굽네 치킨이 좋아요. 볼케이노랑 고추바사삭이 그렇게나 맛있더라구요. 이유는 없어요. 맛있어요. 아마 매운걸 좋아하는 걸지도요. 아 그리고 최근에 훌랄라도 먹어봤는데요. 그것도 엄청 맛있더군요. 집 앞에 있어서 한번 포장해본건데 이제 그냥 가서 쓱 가져와도 될거같기도 하고요. 정말 좋습니다. 그때 머리가 아팠는데도 치킨은 그냥 술술 넘어가더라구요. 역시 치느님이십니다. 그래서 그런데 여러분도 갓치킨 치느님으로 오늘 저녁 어떠신지요.치킨은 너무 맛있습니다. 진짜로요. 저는 개인적으로 굽네 치킨이 좋아요. 볼케이노랑 고추바사삭이 그렇게나 맛있더라구요. 이유는 없어요. 맛있어요. 아마 매운걸 좋아하는 걸지도요. 아 그리고 최근에 훌랄라도 먹어봤는데요. 그것도 엄청 맛있더군요. 집 앞에 있어서 한번 포장해본건데 이제 그냥 가서 쓱 가져와도 될거같기도 하고요. 정말 좋습니다. 그때 머리가 아팠는데도 치킨은 그냥 술술 넘어가더라구요. 역시 치느님이십니다. 그래서 그런데 여러분도 갓치킨 치느님으로 오늘 저녁 어떠신지요.치킨은 너무 맛있습니다. 진짜로요. 저는 개인적으로 굽네 치킨이 좋아요. 볼케이노랑 고추바사삭이 그렇게나 맛있더라구요. 이유는 없어요. 맛있어요. 아마 매운걸 좋아하는 걸지도요. 아 그리고 최근에 훌랄라도 먹어봤는데요. 그것도 엄청 맛있더군요. 집 앞에 있어서 한번 포장해본건데 이제 그냥 가서 쓱 가져와도 될거같기도 하고요. 정말 좋습니다. 그때 머리가 아팠는데도 치킨은 그냥 술술 넘어가더라구요. 역시 치느님이십니다. 그래서 그런데 여러분도 갓치킨 치느님으로 오늘 저녁 어떠신지요.치킨은 너무 맛있습니다. 진짜로요. 저는 개인적으로 굽네 치킨이 좋아요. 볼케이노랑 고추바사삭이 그렇게나 맛있더라구요. 이유는 없어요. 맛있어요. 아마 매운걸 좋아하는 걸지도요. 아 그리고 최근에 훌랄라도 먹어봤는데요. 그것도 엄청 맛있더군요. 집 앞에 있어서 한번 포장해본건데 이제 그냥 가서 쓱 가져와도 될거같기도 하고요. 정말 좋습니다. 그때 머리가 아팠는데도 치킨은 그냥 술술 넘어가더라구요. 역시 치느님이십니다. 그래서 그런데 여러분도 갓치킨 치느님으로 오늘 저녁 어떠신지요.치킨은 너무 맛있습니다. 진짜로요. 저는 개인적으로 굽네 치킨이 좋아요. 볼케이노랑 고추바사삭이 그렇게나 맛있더라구요. 이유는 없어요. 맛있어요. 아마 매운걸 좋아하는 걸지도요. 아 그리고 최근에 훌랄라도 먹어봤는데요. 그것도 엄청 맛있더군요. 집 앞에 있어서 한번 포장해본건데 이제 그냥 가서 쓱 가져와도 될거같기도 하고요. 정말 좋습니다. 그때 머리가 아팠는데도 치킨은 그냥 술술 넘어가더라구요. 역시 치느님이십니다. 그래서 그런데 여러분도 갓치킨 치느님으로 오늘 저녁 어떠신지요.치킨은 너무 맛있습니다. 진짜로요. 저는 개인적으로 굽네 치킨이 좋아요. 볼케이노랑 고추바사삭이 그렇게나 맛있더라구요. 이유는 없어요. 맛있어요. 아마 매운걸 좋아하는 걸지도요. 아 그리고 최근에 훌랄라도 먹어봤는데요. 그것도 엄청 맛있더군요. 집 앞에 있어서 한번 포장해본건데 이제 그냥 가서 쓱 가져와도 될거같기도 하고요. 정말 좋습니다. 그때 머리가 아팠는데도 치킨은 그냥 술술 넘어가더라구요. 역시 치느님이십니다. 그래서 그런데 여러분도 갓치킨 치느님으로 오늘 저녁 어떠신지요."',
-        recipe: '1. 치킨 밑간'
-    };
-
     return (
         <div className='modal_container' onClick={onCloseModal}>
             <div className='modal w-11/12 h-5/6'>
@@ -26,29 +26,58 @@ const Modal = ({modalClose}) => {
                 <div className=''>
                     <h1 className='text-center font-bold text-4xl mt-10'>오늘의 메뉴는?</h1>
                     <Foods 
-                        name = {randomMenu.name}
-                        foodImg= {randomMenu.Img}
-                        contents = {randomMenu.contents}
-                        recipe= {randomMenu.recipe}
+                        name = {foodInfo.name}
+                        category = {foodInfo.category}
+                        keyword = {foodInfo.keyword}
+                        foodImg= {foodInfo.image}
+                        description = {foodInfo.description}
+                        modalClose={setClickedKw}
                     />
                 </div>
             </div>
         </div>
     );
 }
-
 function Shuffle() {
     const [modalOpen, setModalOpen] = useState(false);
+    const [foodData, setFoodData] = useState({});
+
+    const randomMenu = {
+        name: '화양적',
+        category: '전류',
+        keyword: '#육류전 #소고기 #오이',
+        image: '/img/hwawang.png',
+        description: 'https://terms.naver.com/search.naver?query=화양적'
+    };
+    const randomMenu2 = {
+        name: "고비볶음",
+        category: "볶음류",
+        keyword: "#채소 및 해조류볶음 #고비 #콩기름",
+        image: "https://mblogthumb-phinf.pstatic.net/20121206_210/tangkwon_1354774383327AWVDt_JPEG/002.jpg?type=w2",
+        description: "https://terms.naver.com/search.naver?query=고비볶음"
+    };
+
     const modalClose = () => {
         setModalOpen((modalOpen) => !modalOpen);
+    }
+    const onClickRandom = () => {
+        axios.get("/api/menu/random")
+        .then(response => {
+            setFoodData(JSON.stringify(response.data))
+            console.log(JSON.stringify(response.data))
+            }
+        )
+        .catch(error => console.log(error))
+        //setFoodData(randomMenu2) //api 연결 후 삭제!!!!
+        modalClose()
     }
 
     return (
         <div>
-            <button onClick={modalClose} className="h-full mr-2 border rounded-md border-slate-300 hover:bg-blue-400">
+            <button onClick={onClickRandom} className="h-full mr-2 border rounded-md border-slate-300 hover:bg-blue-400">
                 <img src="/img/shuffle.png" className="w-3 mx-2"/>
             </button>
-            {modalOpen && <Modal modalClose={modalClose}/>}
+            {modalOpen && <Modal modalClose={modalClose} foodInfo={foodData}/>}
         </div>
     );
 }
