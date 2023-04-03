@@ -33,15 +33,17 @@ function SearchFood() {
     const empty_foods = []
 
     useEffect(() => {
-        axios.get(`/api/menu/serach?searchWord=${query}`)
+        axios.get(`/api/menu/search?searchWord=${query}`)
         .then(response => {
-            console.log(JSON.stringify(response.data))
-            setPosts(JSON.stringify(response.data)) //api 연결 후 여는거!!! ==> 검색 결과 데이터
+//            console.log(JSON.stringify(response.data), response.data, response.data,typeof(JSON.stringify(response.data)))
+//            const tmp = JSON.stringify(response.data)
+//            console.log(tmp.length)
+            setPosts(response.data) //api 연결 후 여는거!!! ==> 검색 결과 데이터
             }
         )
         .catch(error => console.log(error));    
         // setPosts(foods) //api 연결할 때 주석처리
-        // console.log(posts, posts.length)
+         console.log(posts, posts.length)
     }, [query])
 
     const indexOfLast = currentPage * postsPerPage;

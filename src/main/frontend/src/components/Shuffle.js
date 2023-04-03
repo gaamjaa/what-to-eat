@@ -3,6 +3,7 @@ import Foods from './Foods';
 import axios from 'axios';
 
 const Modal = ({modalClose, foodInfo}) => {
+    console.log(foodInfo)
     const [ClickedKw, setClickedKw] = useState(false)
     useEffect(()=>{
         if(ClickedKw){
@@ -26,7 +27,7 @@ const Modal = ({modalClose, foodInfo}) => {
                 <div className=''>
                     <h1 className='text-center font-bold text-4xl mt-10'>오늘의 메뉴는?</h1>
                     {
-                        Object.keys(foodInfo).length === 0 ?
+                        foodInfo.length === 0 ?
                         <div className="flex flex-col items-center mt-10">
                             <img className="w-36" src="/img/error.png"></img>
                             <p className="text-xl">잠시 연결이 불안해요.</p>
@@ -34,11 +35,11 @@ const Modal = ({modalClose, foodInfo}) => {
                         </div>
                         :
                         <Foods 
-                        name = {foodInfo.name}
-                        category = {foodInfo.category}
-                        keyword = {foodInfo.keyword}
-                        foodImg= {foodInfo.image}
-                        description = {foodInfo.description}
+                        name = {foodInfo[0].name}
+                        category = {foodInfo[0].category}
+                        keyword = {foodInfo[0].keyword}
+                        foodImg= {foodInfo[0].image}
+                        description = {foodInfo[0].description}
                         modalClose={setClickedKw}/>                    
                     }
                 </div>
@@ -48,7 +49,7 @@ const Modal = ({modalClose, foodInfo}) => {
 }
 function Shuffle() {
     const [modalOpen, setModalOpen] = useState(false);
-    const [foodData, setFoodData] = useState({});
+    const [foodData, setFoodData] = useState([]);
 
     const randomMenu = {
         name: '화양적',
@@ -71,12 +72,13 @@ function Shuffle() {
     const onClickRandom = () => {
         axios.get("/api/menu/random")
         .then(response => {
-            setFoodData(JSON.stringify(response.data))
-            console.log(JSON.stringify(response.data))
+            setFoodData(response.data)
+            console.log(response.data)
             }
         )
         .catch(error => console.log(error))
         // setFoodData(randomMenu2) //api 연결 후 삭제!!!!
+        console.log(foodData)
         modalClose()
     }
 

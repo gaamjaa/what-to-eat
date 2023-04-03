@@ -38,13 +38,13 @@ function CategoryFood(){
     useEffect(() => {
         axios.get(`/api/menu/category?categoryWord=${id}`)
         .then(response => {
-            console.log(JSON.stringify(response.data))
-            setPosts(JSON.stringify(response.data));
+            console.log(JSON.stringify(response.data), response.data)
+            setPosts(response.data);
         }).catch(error => console.log(error))
 
         //dummy
         // setPosts(foods) //api 연결하면 지우기!!! ==> 이게 카테고리별 음식 버튼 만들어주는 데이터
-
+        console.log(posts, posts.length)
     }, []);
     // console.log(posts)
 
