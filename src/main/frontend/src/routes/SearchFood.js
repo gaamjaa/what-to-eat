@@ -30,6 +30,7 @@ function SearchFood() {
         {id:34,name:"보리밥(팥)",category:"밥류",keyword:"#잡곡밥 #보리 #멥쌀",image:"https://t1.daumcdn.net/cfile/tistory/2525833758076CDA3C",description:"https://terms.naver.com/search.naver?query=보리밥(팥)"},
         {id:35,name:"수수밥",category:"밥류",keyword:"#잡곡밥 #수수 #멥쌀",image:"https://mblogthumb-phinf.pstatic.net/20141225_71/jjaehhun_1419465591122bJS3O_JPEG/IMG_8537.JPG?type=w2",description:"https://terms.naver.com/search.naver?query=수수밥"},
     ]
+    const empty_foods = []
 
     useEffect(() => {
         axios.get(`/api/menu/serach?searchWord=${query}`)
@@ -39,7 +40,8 @@ function SearchFood() {
             }
         )
         .catch(error => console.log(error));    
-        //setPosts(foods) //api 연결할 때 주석처리
+        // setPosts(foods) //api 연결할 때 주석처리
+        // console.log(posts, posts.length)
     }, [query])
 
     const indexOfLast = currentPage * postsPerPage;
@@ -63,7 +65,20 @@ function SearchFood() {
             <p className="text-center"><span className="font-bold text-xl">{query}</span><span> 검색결과</span></p>
             <div className="flex flex-col">
                 <div className="h-full mx-10 mt-10 mb-10">
-                    <Posts posts={currentPosts(posts)} loading={loading}></Posts>
+                    {
+                        posts.length === 0 ?
+                        <div className="flex justify-center">
+                            <div>
+                            <p><span className="font-bold">{query}</span>와 일치하는 검색결과가 없습니다.</p>
+                            <ul className="mt-10 list-disc">
+                                <li>단어의 철자가 정확한지 확인해 보세요.</li>
+                                <li>검색어의 단어 수를 줄이거나, 보다 일반적인 검색어로 다시 검색해 보세요.</li>
+                            </ul>
+                            </div>
+                        </div>
+                        :
+                        <Posts posts={currentPosts(posts)} loading={loading}></Posts>
+                    }
                 </div>
                 <div className="flex justify-center">
                 <Pagination

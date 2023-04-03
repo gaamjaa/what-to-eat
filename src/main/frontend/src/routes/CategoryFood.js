@@ -43,7 +43,7 @@ function CategoryFood(){
         }).catch(error => console.log(error))
 
         //dummy
-        //setPosts(foods) //api 연결하면 지우기!!! ==> 이게 카테고리별 음식 버튼 만들어주는 데이터
+        // setPosts(foods) //api 연결하면 지우기!!! ==> 이게 카테고리별 음식 버튼 만들어주는 데이터
 
     }, []);
     // console.log(posts)
@@ -69,7 +69,16 @@ function CategoryFood(){
             </div>
             <div className="flex flex-col">
                 <div className="h-full mx-10 mt-10 mb-10">
-                    <Posts posts={currentPosts(posts)} loading={loading}></Posts>
+                    {
+                        posts.length === 0 ?
+                        <div className="flex flex-col items-center">
+                            <img className="w-36" src="/img/error.png"></img>
+                            <p className="text-xl">잠시 연결이 불안해요.</p>
+                            <p className="text-sm text-gray-500 mt-5">조금 뒤 다시 접속해주세요.</p>
+                        </div>
+                        :
+                        <Posts posts={currentPosts(posts)} loading={loading}></Posts>
+                    }
                 </div>
                 <div className="flex justify-center">
                 <Pagination

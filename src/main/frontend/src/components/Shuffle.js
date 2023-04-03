@@ -25,14 +25,22 @@ const Modal = ({modalClose, foodInfo}) => {
                 </button>
                 <div className=''>
                     <h1 className='text-center font-bold text-4xl mt-10'>오늘의 메뉴는?</h1>
-                    <Foods 
+                    {
+                        Object.keys(foodInfo).length === 0 ?
+                        <div className="flex flex-col items-center mt-10">
+                            <img className="w-36" src="/img/error.png"></img>
+                            <p className="text-xl">잠시 연결이 불안해요.</p>
+                            <p className="text-sm text-gray-500 mt-5">조금 뒤 다시 접속해주세요.</p>
+                        </div>
+                        :
+                        <Foods 
                         name = {foodInfo.name}
                         category = {foodInfo.category}
                         keyword = {foodInfo.keyword}
                         foodImg= {foodInfo.image}
                         description = {foodInfo.description}
-                        modalClose={setClickedKw}
-                    />
+                        modalClose={setClickedKw}/>                    
+                    }
                 </div>
             </div>
         </div>
@@ -68,7 +76,7 @@ function Shuffle() {
             }
         )
         .catch(error => console.log(error))
-        //setFoodData(randomMenu2) //api 연결 후 삭제!!!!
+        // setFoodData(randomMenu2) //api 연결 후 삭제!!!!
         modalClose()
     }
 
