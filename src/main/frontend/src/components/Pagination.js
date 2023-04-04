@@ -29,6 +29,8 @@ const PageLi = styled.li`
     color: white;
     background-color: #fecdd3;
   }
+  background-color: ${(props)=>(props.current === props.num ? "#fecdd3" : null)};
+  color: ${(props)=>(props.current === props.num ? "white" : null)};
 `;
 
 const PageSpan = styled.span`
@@ -40,8 +42,9 @@ const PageSpan = styled.span`
   }
 `;
 
-function Pagination ({ postsPerPage, totalPosts, paginate }) {
+function Pagination ({ postsPerPage, totalPosts, paginate, currentPage }) {
   const pageNumbers = [];
+  // console.log(currentPage)
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
     pageNumbers.push(i);
   }
@@ -50,7 +53,7 @@ function Pagination ({ postsPerPage, totalPosts, paginate }) {
       <nav>
         <PageUl className="pagination">
           {pageNumbers.map((number) => (
-            <PageLi key={number} className="page-item">
+            <PageLi current={currentPage} num={number} key={number} className="page-item">
               <PageSpan onClick={() => paginate(number)} className="page-link">
                 {number}
               </PageSpan>

@@ -1,10 +1,12 @@
 import {useEffect, useState} from 'react';
 import Foods from './Foods';
 import axios from 'axios';
+import "../css/loading.css"
 
-const Modal = ({modalClose, foodInfo}) => {
+const Modal = ({modalClose, foodInfo, isConnected}) => {
     console.log(foodInfo)
     const [ClickedKw, setClickedKw] = useState(false)
+
     useEffect(()=>{
         if(ClickedKw){
             modalClose()
@@ -28,11 +30,17 @@ const Modal = ({modalClose, foodInfo}) => {
                     <h1 className='text-center font-bold text-4xl mt-10'>오늘의 메뉴는?</h1>
                     {
                         foodInfo.length === 0 ?
-                        <div className="flex flex-col items-center mt-10">
-                            <img className="w-36" src="/img/error.png"></img>
-                            <p className="text-xl">잠시 연결이 불안해요.</p>
-                            <p className="text-sm text-gray-500 mt-5">조금 뒤 다시 접속해주세요.</p>
-                        </div>
+                            isConnected ?
+                                <div className="flex flex-col items-center mt-10">
+                                    <img className="w-36" src="/img/error.png"></img>
+                                    <p className="text-xl">잠시 연결이 불안해요.</p>
+                                    <p className="text-sm text-gray-500 mt-5">조금 뒤 다시 접속해주세요.</p>
+                                </div>
+                            :
+                                <div className="flex flex-col items-center">
+                                    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                                    <p className="text-sm text-gray-500 mt-5">로딩중입니다.</p>
+                                </div>
                         :
                         <Foods 
                         name = {foodInfo[0].name}
@@ -50,6 +58,7 @@ const Modal = ({modalClose, foodInfo}) => {
 function Shuffle() {
     const [modalOpen, setModalOpen] = useState(false);
     const [foodData, setFoodData] = useState([]);
+    const [isConnected, setIsConnected] = useState(false);
 
     const randomMenu = {
         name: '화양적',
@@ -74,9 +83,13 @@ function Shuffle() {
         .then(response => {
             setFoodData(response.data)
             console.log(response.data)
+            setIsConnected(true)
             }
         )
-        .catch(error => console.log(error))
+        .catch(error => {
+            console.log(error)
+            setIsConnected(true)
+        })
         // setFoodData(randomMenu2) //api 연결 후 삭제!!!!
         console.log(foodData)
         modalClose()
@@ -87,7 +100,7 @@ function Shuffle() {
             <button onClick={onClickRandom} className="h-full mr-2 border rounded-md border-slate-300 hover:bg-blue-400">
                 <img src="/img/shuffle.png" className="w-3 mx-2"/>
             </button>
-            {modalOpen && <Modal modalClose={modalClose} foodInfo={foodData}/>}
+            {modalOpen && <Modal modalClose={modalClose} foodInfo={foodData} isConnected={isConnected}/>}
         </div>
     );
 }

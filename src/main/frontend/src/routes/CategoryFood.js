@@ -6,12 +6,14 @@ import FoodBtn from "../components/FoodBtn";
 import Posts from "../components/Posts";
 import Pagination from "../components/Pagination";
 import axios from "axios";
+import "../css/loading.css"
 
 function CategoryFood(){
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage, setPostsPerPage] = useState(15);
+    const [isConnected, setIsConnected] = useState(false);
 
     const {id} = useParams();
     // console.log(id)
@@ -40,7 +42,11 @@ function CategoryFood(){
         .then(response => {
             console.log(JSON.stringify(response.data), response.data)
             setPosts(response.data);
-        }).catch(error => console.log(error))
+            setIsConnected(true)
+        }).catch(error => {
+            console.log(error)
+            setIsConnected(true)
+        })
 
         //dummy
         // setPosts(foods) //api 연결하면 지우기!!! ==> 이게 카테고리별 음식 버튼 만들어주는 데이터
@@ -53,7 +59,6 @@ function CategoryFood(){
     const currentPosts = (posts) => {
       let currentPosts = 0;
       currentPosts = posts.slice(indexOfFirst, indexOfLast);
-    //   console.log(currentPosts)
       return currentPosts;
     };
     
@@ -71,11 +76,17 @@ function CategoryFood(){
                 <div className="h-full mx-10 mt-10 mb-10">
                     {
                         posts.length === 0 ?
-                        <div className="flex flex-col items-center">
-                            <img className="w-36" src="/img/error.png"></img>
-                            <p className="text-xl">잠시 연결이 불안해요.</p>
-                            <p className="text-sm text-gray-500 mt-5">조금 뒤 다시 접속해주세요.</p>
-                        </div>
+                            isConnected ?
+                                <div className="flex flex-col items-center">
+                                    <img className="w-36" src="/img/error.png"></img>
+                                    <p className="text-xl">잠시 연결이 불안해요.</p>
+                                    <p className="text-sm text-gray-500 mt-5">조금 뒤 다시 접속해주세요.</p>
+                                </div>
+                            :
+                                <div className="flex flex-col items-center">
+                                    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                                    <p className="text-sm text-gray-500 mt-5">로딩중입니다.</p>
+                                </div>
                         :
                         <Posts posts={currentPosts(posts)} loading={loading}></Posts>
                     }
@@ -85,6 +96,7 @@ function CategoryFood(){
                     postsPerPage={postsPerPage}
                     totalPosts={posts.length}
                     paginate={setCurrentPage}
+                    currentPage={currentPage}
                 ></Pagination>
                 </div>
             </div>
